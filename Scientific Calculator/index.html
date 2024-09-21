@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Scientific Calculator</h2>
+        <div class="form-group">
+            <input type="text" id="display" placeholder="0" disabled>
+        </div>
+        <div class="button-group">
+            <input type="button" value="AC" onclick="clearDisplay()" class="operator">
+            <input type="button" value="√" onclick="calculateSquareRoot()" class="operator">
+            <input type="button" value="x²" onclick="calculateSquare()" class="operator">
+            <input type="button" value="/" onclick="appendToDisplay('/')" class="operator">
+        </div>
+        <div class="button-group">
+            <input type="button" value="7" onclick="appendToDisplay('7')">
+            <input type="button" value="8" onclick="appendToDisplay('8')">
+            <input type="button" value="9" onclick="appendToDisplay('9')">
+            <input type="button" value="*" onclick="appendToDisplay('*')" class="operator">
+        </div>
+        <div class="button-group">
+            <input type="button" value="4" onclick="appendToDisplay('4')">
+            <input type="button" value="5" onclick="appendToDisplay('5')">
+            <input type="button" value="6" onclick="appendToDisplay('6')">
+            <input type="button" value="-" onclick="appendToDisplay('-')" class="operator">
+        </div>
+        <div class="button-group">
+            <input type="button" value="1" onclick="appendToDisplay('1')">
+            <input type="button" value="2" onclick="appendToDisplay('2')">
+            <input type="button" value="3" onclick="appendToDisplay('3')">
+            <input type="button" value="+" onclick="appendToDisplay('+')" class="operator">
+        </div>
+        <div class="button-group">
+            <input type="button" value="0" onclick="appendToDisplay('0')" class="zero">
+            <input type="button" value="." onclick="appendToDisplay('.')">
+            <input type="button" value="=" class="equal" onclick="calculateResult()">
+            <input type="button" value="^" onclick="appendToDisplay('**')" class="operator">
+        </div>
+    </div>
+
+    <script>
+        function appendToDisplay(value) {
+            const display = document.getElementById('display');
+            if (display.value === '0' && value !== '.') {
+                display.value = value;
+            } else {
+                display.value += value;
+            }
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').value = '0';
+        }
+
+        function calculateResult() {
+            const display = document.getElementById('display');
+            try {
+                display.value = eval(display.value) || '0';
+            } catch (error) {
+                display.value = 'Error';
+                setTimeout(clearDisplay, 1500); // Clear after 1.5 seconds
+            }
+        }
+
+        function calculateSquare() {
+            const display = document.getElementById('display');
+            const value = parseFloat(display.value);
+            display.value = value * value;
+        }
+
+        function calculateSquareRoot() {
+            const display = document.getElementById('display');
+            const value = parseFloat(display.value);
+            display.value = Math.sqrt(value);
+        }
+    </script>
+</body>
+</html>

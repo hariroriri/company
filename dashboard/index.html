@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="d-flex" id="wrapper">
+        <div class="bg-dark" id="sidebar-wrapper">
+            <div class="sidebar-heading">
+                <img src="images/logo-roriri.jpeg" class="img-size" alt="roriri-logo">
+                <h6 class="logo-heading">RORIRI SOFTWARE</h6>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action bg-dark" onclick="showSection('dashboard')"><i class="fas fa-tachometer-alt mr-2"></i>Dashboard</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark" onclick="showSection('clients')"><i class="fas fa-users mr-2"></i>Clients</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark" onclick="showSection('trainers')"><i class="fas fa-user-tie mr-2"></i>Trainers</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark" onclick="showSection('employees')"><i class="fas fa-briefcase mr-2"></i>Employees</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark" onclick="showSection('students')"><i class="fas fa-user-graduate mr-2"></i>Students</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark" onclick="showSection('projects')"><i class="fas fa-project-diagram mr-2"></i>Projects</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark" onclick="showSection('attendance')"><i class="fas fa-calendar-check mr-2"></i>Attendance</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark" onclick="showSection('accounts')"><i class="fas fa-file-invoice-dollar mr-2"></i>Accounts</a>
+            </div>
+        </div>
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <button class="btn" id="menu-toggle"><i class="fas fa-bars"></i></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fas fa-user-tie"></i> National Trainer</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="container-fluid">
+                <h1 class="mt-4" id="section-title">Dashboard</h1>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <label>Show 
+                            <select class="custom-select custom-select-sm form-control form-control-sm" style="width: auto;">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select> entries
+                        </label>
+                    </div>
+                    <div class="search">
+                        <input type="search" class="form-control form-control-sm" placeholder="Search">
+                        <button class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#clientModal">Add New Client</button>
+                </div>
+                <div class="table-responsive">
+                    <table id="dataTable" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>S.No.</th>
+                                <th>Name</th>
+                                <th>Company</th>
+                                <th>Location</th>
+                                <th>Contact No</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table rows will be dynamically added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Client Modal -->
+    <div class="modal fade" id="clientModal" tabindex="-1" aria-labelledby="clientModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="clientModalLabel">Add New Client</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="clientForm">
+                        <div class="form-group">
+                            <label for="clientName">Name</label>
+                            <input type="text" class="form-control" id="clientName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clientCompany">Company</label>
+                            <input type="text" class="form-control" id="clientCompany" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clientLocation">Location</label>
+                            <input type="text" class="form-control" id="clientLocation" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clientContact">Contact No</label>
+                            <input type="text" class="form-control" id="clientContact" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Client</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        let currentSection = 'dashboard';
+        const sections = {
+            dashboard: [],
+            clients: [],
+            trainers: [],
+            employees: [],
+            students: [],
+            projects: [],
+            attendance: [],
+            accounts: []
+        };
+
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+
+        function showSection(section) {
+            currentSection = section;
+            document.getElementById('section-title').innerText = section.charAt(0).toUpperCase() + section.slice(1);
+            renderTable();
+        }
+
+        function renderTable() {
+            const tableBody = document.querySelector('#dataTable tbody');
+            tableBody.innerHTML = '';
+            sections[currentSection].forEach((item, index) => {
+                const row = tableBody.insertRow();
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${item.name}</td>
+                    <td>${item.company}</td>
+                    <td>${item.location}</td>
+                    <td>${item.contact}</td>
+                    <td><button class="btn btn-danger btn-sm" onclick="deleteRow(${index})">Delete</button></td>
+                `;
+            });
+        }
+
+        function addNewClient(event) {
+            event.preventDefault();
+            const name = document.getElementById('clientName').value;
+            const company = document.getElementById('clientCompany').value;
+            const location = document.getElementById('clientLocation').value;
+            const contact = document.getElementById('clientContact').value;
+            sections[currentSection].push({ name, company, location, contact });
+            renderTable();
+            $('#clientModal').modal('hide');
+            document.getElementById('clientForm').reset();
+        }
+
+        function deleteRow(index) {
+            sections[currentSection].splice(index, 1);
+            renderTable();
+        }
+
+        document.getElementById('clientForm').addEventListener('submit', addNewClient);
+
+        document.addEventListener("DOMContentLoaded", function() {
+            renderTable();
+        });
+    </script>
+</body>
+</html>
